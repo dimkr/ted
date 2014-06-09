@@ -1,0 +1,631 @@
+CC=@CC@
+X_CFLAGS=@X_CFLAGS@
+XPM_CFLAGS=@XPM_CFLAGS@
+PNG_CFLAGS=@PNG_CFLAGS@
+ZLIB_CFLAGS=@ZLIB_CFLAGS@
+JPEG_CFLAGS=@JPEG_CFLAGS@
+TIFF_CFLAGS=@TIFF_CFLAGS@
+
+WFLAGS=	-Wall			\
+	-pedantic		\
+	-Wpointer-arith		\
+	-Wstrict-prototypes	\
+	-Wmissing-declarations	\
+	-Wnested-externs	\
+	-Wshadow		\
+	-Wmissing-prototypes
+
+INCLUDES=	\
+	$(XPM_CFLAGS)		\
+	$(PNG_CFLAGS)		\
+	$(ZLIB_CFLAGS)		\
+	$(JPEG_CFLAGS)		\
+	$(TIFF_CFLAGS)		\
+	-I../include		\
+	-I. -I../appUtil
+
+CFLAGS=	\
+	@CFLAGS@		\
+	$(X_CFLAGS)		\
+	$(INCLUDES)
+
+#CFLAGS= -g -O2 $(WFLAGS) $(X_CFLAGS) $(INCLUDES)
+
+# 51 lines
+OBS	=	\
+		bmxwd.o\
+		bmxv.o\
+		bmxpm.o\
+		bmxbm.o\
+		bmwmf.o\
+		bmwbmp.o\
+		bmtogray.o\
+		bmtiff.o\
+		bmthreshold.o\
+		bmsqueeze.o\
+		bmsgi.o\
+		bmselect.o\
+		bmreduce.o\
+		bmputrow.o\
+		bmpng.o\
+		bmplanar.o\
+		bmpgm.o\
+		bmpcx.o\
+		bmpalette.o\
+		bmmorpho.o\
+		bmmapcolors.o\
+		bmjpeg.o\
+		bmio.o\
+		bminvert.o\
+		bmgif.o\
+		bmgetrow.o\
+		bmgamma.o\
+		bmformats.o\
+		bmflip.o\
+		bmfilter.o\
+		bmeps.o\
+		bmdraw.o\
+		bmconvert.o\
+		bmcolor.o\
+		bmbmp.o\
+		bmalpha.o\
+		bmadm.o\
+		bm_egif_lib.o\
+		bm_dgif_lib.o\
+		bmTextureMap.o\
+		bmSegments.o\
+		bmMakeImage.o\
+		bmGrayHisto.o\
+		bmForAll.o\
+		bmFindLineSegments.o\
+		bmFillJob.o\
+		bmDrawImage.o\
+		bmCountLine.o\
+		bmClusterSegments.o
+
+../lib/bitmap.a:	$(OBS)
+	ar ruv $@ $(OBS) && @RANLIB@ $@
+
+#
+#  This is cyclic, but at least it documents what extra autoconf configuration
+#  is used in this directory:
+#
+ACLOCAL=			\
+	../configure/xpm.m4	\
+	../configure/png.m4	\
+	../configure/zlib.m4	\
+	../configure/jpeg.m4	\
+	../configure/tiff.m4
+
+aclocal.m4:	$(ACLOCAL)
+	cat $(ACLOCAL) > $@
+
+# deps -I. -I../include -I../appUtil -I/home/gaai/mark/LinuxProgrammas/zlib -I/home/gaai/mark/LinuxProgrammas/jpeg -I/usr/local/include -I/home/gaai/mark/LinuxProgrammas/libpng
+######################################## !! sh
+
+bmClusterSegments.o: \
+    bmClusterSegments.c \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bmCountLine.o: \
+    bmCountLine.c \
+    bitmapConfig.h \
+    bmintern.h \
+    bitmap.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bmDrawImage.o: \
+    bmDrawImage.c \
+    bitmapConfig.h \
+    bmintern.h \
+    bitmap.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bmFillJob.o: \
+    bmFillJob.c \
+    bitmapConfig.h \
+    bmintern.h \
+    bitmap.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    bmgetrow.h \
+    bmputrow.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bmFindLineSegments.o: \
+    bmFindLineSegments.c \
+    bitmapConfig.h \
+    bmintern.h \
+    bitmap.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bmForAll.o: \
+    bmForAll.c \
+    bitmapConfig.h \
+    bmintern.h \
+    bitmap.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bmGrayHisto.o: \
+    bmGrayHisto.c \
+    bitmapConfig.h \
+    bmGrayHisto.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bmMakeImage.o: \
+    bmMakeImage.c \
+    bitmapConfig.h \
+    bmintern.h \
+    bitmap.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bmSegments.o: \
+    bmSegments.c \
+    bitmapConfig.h \
+    bmSegments.h \
+    bitmap.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    bmintern.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bmTextureMap.o: \
+    bmTextureMap.c \
+    bitmapConfig.h \
+    bmintern.h \
+    bitmap.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    bmgetrow.h \
+    bmputrow.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bm_dgif_lib.o: \
+    bm_dgif_lib.c \
+    bm_gif_lib.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    ../appUtil/sioBlocked.h \
+    ../appUtil/sioLzw.h \
+    ../appUtil/sioEndian.h \
+    ../appUtil/utilEndian.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bm_egif_lib.o: \
+    bm_egif_lib.c \
+    bm_gif_lib.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h \
+    ../appUtil/sioBlocked.h \
+    ../appUtil/sioLzw.h \
+    ../appUtil/sioEndian.h \
+    ../appUtil/utilEndian.h
+
+bmadm.o: \
+    bmadm.c \
+    bitmapConfig.h \
+    bmintern.h \
+    bitmap.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bmalpha.o: \
+    bmalpha.c \
+    bitmapConfig.h \
+    bmintern.h \
+    bitmap.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bmbmp.o: \
+    bmbmp.c \
+    bitmapConfig.h \
+    bmintern.h \
+    bitmap.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    ../appUtil/sioHex.h \
+    ../appUtil/sioEndian.h \
+    ../appUtil/utilEndian.h \
+    ../appUtil/sioStdio.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bmcolor.o: \
+    bmcolor.c \
+    bitmapConfig.h \
+    bmcolor.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bmconvert.o: \
+    bmconvert.c \
+    bitmapConfig.h \
+    bmintern.h \
+    bitmap.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    bmgetrow.h \
+    bmputrow.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bmdraw.o: \
+    bmdraw.c \
+    bitmapConfig.h \
+    bmintern.h \
+    bitmap.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bmeps.o: \
+    bmeps.c \
+    bitmapConfig.h \
+    ../appUtil/sioStdio.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/sioHex.h \
+    ../appUtil/sioBase85.h \
+    ../appUtil/sioFlate.h \
+    ../appUtil/sioLzw.h \
+    bmintern.h \
+    bitmap.h \
+    bmcolor.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bmfilter.o: \
+    bmfilter.c \
+    bitmapConfig.h \
+    bmintern.h \
+    bitmap.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    bmgetrow.h \
+    bmputrow.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bmflip.o: \
+    bmflip.c \
+    bitmapConfig.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/geo2DInteger.h \
+    bmintern.h \
+    bitmap.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bmformats.o: \
+    bmformats.c \
+    bitmapConfig.h \
+    bmintern.h \
+    bitmap.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bmgamma.o: \
+    bmgamma.c \
+    bitmapConfig.h \
+    bmintern.h \
+    bitmap.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bmgetrow.o: \
+    bmgetrow.c \
+    bitmapConfig.h \
+    bmintern.h \
+    bitmap.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    bmgetrow.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bmgif.o: \
+    bmgif.c \
+    bitmapConfig.h \
+    ../appUtil/sioStdio.h \
+    ../appUtil/sioGeneral.h \
+    bmintern.h \
+    bitmap.h \
+    bmcolor.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h \
+    bm_gif_lib.h
+
+bminvert.o: \
+    bminvert.c \
+    bitmapConfig.h \
+    bmintern.h \
+    bitmap.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bmio.o: \
+    bmio.c \
+    bitmapConfig.h \
+    bitmap.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bmjpeg.o: \
+    bmjpeg.c \
+    bitmapConfig.h \
+    ../appUtil/sioStdio.h \
+    ../appUtil/sioGeneral.h \
+    bmintern.h \
+    bitmap.h \
+    bmcolor.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bmmapcolors.o: \
+    bmmapcolors.c \
+    bitmapConfig.h \
+    bmintern.h \
+    bitmap.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bmmorpho.o: \
+    bmmorpho.c \
+    bitmapConfig.h \
+    bmintern.h \
+    bitmap.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bmpalette.o: \
+    bmpalette.c \
+    bitmapConfig.h \
+    bmintern.h \
+    bitmap.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bmpcx.o: \
+    bmpcx.c \
+    bitmapConfig.h \
+    bmintern.h \
+    bitmap.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    ../appUtil/utilEndian.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bmpgm.o: \
+    bmpgm.c \
+    bitmapConfig.h \
+    bmintern.h \
+    bitmap.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bmpng.o: \
+    bmpng.c \
+    bitmapConfig.h \
+    bmintern.h \
+    bitmap.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h \
+    ../appUtil/sioStdio.h \
+    ../appUtil/utilEndian.h
+
+bmputrow.o: \
+    bmputrow.c \
+    bitmapConfig.h \
+    bmintern.h \
+    bitmap.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    bmputrow.h \
+    bmgetrow.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bmreduce.o: \
+    bmreduce.c \
+    bitmapConfig.h \
+    bmintern.h \
+    bitmap.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bmselect.o: \
+    bmselect.c \
+    bitmapConfig.h \
+    bitmap.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bmsgi.o: \
+    bmsgi.c \
+    bitmapConfig.h \
+    bmintern.h \
+    bitmap.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    ../appUtil/utilEndian.h \
+    ../appUtil/sioStdio.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bmsqueeze.o: \
+    bmsqueeze.c \
+    bitmapConfig.h \
+    bmintern.h \
+    bitmap.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    ../appUtil/sioHex.h \
+    ../appUtil/sioEndian.h \
+    ../appUtil/utilEndian.h \
+    ../appUtil/sioStdio.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bmthreshold.o: \
+    bmthreshold.c \
+    bitmapConfig.h \
+    bmGrayHisto.h \
+    bmintern.h \
+    bitmap.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bmtiff.o: \
+    bmtiff.c \
+    bitmapConfig.h \
+    bmintern.h \
+    bitmap.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bmtogray.o: \
+    bmtogray.c \
+    bitmapConfig.h \
+    bmintern.h \
+    bitmap.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bmwbmp.o: \
+    bmwbmp.c \
+    bitmapConfig.h \
+    bmintern.h \
+    bitmap.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    ../appUtil/sioStdio.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bmwmf.o: \
+    bmwmf.c \
+    bitmapConfig.h \
+    bmintern.h \
+    bitmap.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h \
+    ../appUtil/sioStdio.h \
+    ../appUtil/sioEndian.h \
+    ../appUtil/utilEndian.h
+
+bmxbm.o: \
+    bmxbm.c \
+    bitmapConfig.h \
+    bmintern.h \
+    bitmap.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bmxpm.o: \
+    bmxpm.c \
+    bitmapConfig.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h \
+    bmintern.h \
+    bitmap.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h
+
+bmxv.o: \
+    bmxv.c \
+    bitmapConfig.h \
+    bmintern.h \
+    bitmap.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    ../appUtil/sioEndian.h \
+    ../appUtil/utilEndian.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+bmxwd.o: \
+    bmxwd.c \
+    bitmapConfig.h \
+    bmintern.h \
+    bitmap.h \
+    ../appUtil/sioGeneral.h \
+    bmcolor.h \
+    ../appUtil/utilEndian.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h \
+    XWDFile.h
+

@@ -1,0 +1,90 @@
+/***************************************************************************
+ *                                                                         *
+ * Author : Jouk Jansen (joukj@hrem.stm.tudelft.nl)                        *
+ *                                                                         *
+ * Original for appFrameConfig.h on OpenVMS. The compilation procedure     *
+ * copies the file as the 'configure' shell script does not really work    *
+ * on OpenVMS.                                                             *
+ *                                                                         *
+ ***************************************************************************/
+
+/* Define to empty if the keyword does not work.  */
+/* #undef const */
+
+/* Define if you have the ANSI C header files.  */
+#define STDC_HEADERS 1
+
+/* Define if your processor stores words with the most significant
+   byte first (like Motorola and SPARC, unlike Intel and VAX).  */
+/* #undef WORDS_BIGENDIAN */
+
+/* Define if you have the socket function.  */
+#define HAVE_SOCKET 1
+#define HAVE_MKSTEMP 1
+
+/* Define if you have the strerror function.  */
+#define HAVE_STRERROR 1
+
+/* Define if you have the uname function.  */
+#define HAVE_UNAME 1
+
+/* Define if you have the <fcntl.h> header file.  */
+#define HAVE_FCNTL_H 1
+
+/* Define if you have the <sys/time.h> header file.  */
+#define HAVE_SYS_TIME_H 1
+
+/* Define if you have the <unistd.h> header file.  */
+#define HAVE_UNISTD_H 1
+
+/************************************************************************/
+/*									*/
+/*  Locations of application related files				*/
+/*									*/
+/*  AFMDIR:	Location of the font files: something.afm files and the	*/
+/*		optional PostScript to X11 font translation table.	*/
+/*  INDDIR:	Location of the spell check dictionaries.		*/
+/*									*/
+/************************************************************************/
+
+#   define	PREFIX "TED$ROOT" 
+
+#   ifdef	PREFIX
+#	define	PKGDIR	PREFIX
+#   endif
+
+#   ifndef	PKGDIR
+#	define	PKGDIR	"TED$ROOT"
+#   endif
+
+#   ifndef	AFMDIR
+#	define	AFMDIR  "TED$ROOT:[afm]"
+#   endif
+
+#   ifndef 	INDDIR
+#	define	INDDIR	"TED$ROOT:[ind]"
+#   endif
+
+/************************************************************************/
+/*									*/
+/*  Choose a GUI. (only one!)						*/
+/*									*/
+/************************************************************************/
+
+#define	USE_MOTIF 1
+/* #undef USE_GTK */
+
+#include <vms_x_fix.h>
+
+# ifdef __VMS
+/* the problem is that the X11-header files have 2 different definitions
+ * of the following functions. The ones defined in vms_x_fix.h are not valid
+ * here 
+ */
+#undef XtDisplay
+#undef XtScreen
+#undef XtWindow
+#undef XtIsRealized
+#undef XtParent
+
+# endif

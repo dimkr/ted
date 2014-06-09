@@ -1,0 +1,2634 @@
+CC=@CC@
+XM_CFLAGS=@XM_CFLAGS@
+XPM_CFLAGS=@XPM_CFLAGS@
+X_CFLAGS=@X_CFLAGS@
+GTK_CFLAGS=@GTK_CFLAGS@
+
+MOTIF_CFLAGS=$(XM_CFLAGS)
+
+GUI_CFLAGS=$(@GUI@_CFLAGS)
+
+WFLAGS=	-Wall			\
+	-pedantic		\
+	-Wpointer-arith		\
+	-Wstrict-prototypes	\
+	-Wmissing-declarations	\
+	-Wnested-externs	\
+	-Wmissing-prototypes
+
+INCLUDES=		\
+	$(X_CFLAGS)	\
+	$(XPM_CFLAGS)	\
+	$(GUI_CFLAGS)	\
+	-I../appFrame	\
+	-I../appUtil	\
+	-I../bitmap	\
+	-I../ind	\
+	-I../include	\
+	$(DEF_PKGDIR)	\
+	$(DEF_AFMDIR)	\
+	$(DEF_INDDIR)
+
+CFLAGS=			\
+	@CFLAGS@	\
+	$(INCLUDES)
+
+#XM_CFLAGS=-I/home/gaai/mark/gnu/lesstif-0.88.0/include/Motif-1.2
+#CFLAGS	= @CFLAGS@ $(WFLAGS) $(INCLUDES)
+
+# 90 lines
+OBS	=	\
+		sioCopyPasteMotif.o\
+		sioCopyPasteGtk.o\
+		docExpandedTextAttribute.o\
+		appZoomMenu.o\
+		appXvCopyPaste.o\
+		appWinMetaX11.o\
+		appWinMetaPs.o\
+		appWinMetaImg.o\
+		appWinMeta.o\
+		appTree.o\
+		appTextUtil.o\
+		appTextMotif.o\
+		appTextGtk.o\
+		appSymbolPicker.o\
+		appSpellTool.o\
+		appScrollDocument.o\
+		appRuler.o\
+		appRgbCube.o\
+		appRgbChooserPage.o\
+		appResource.o\
+		appReally.o\
+		appQuestion.o\
+		appPutImageMotif.o\
+		appPutImageGtk.o\
+		appPrintDocument.o\
+		appPrintDialog.o\
+		appPaperChooser.o\
+		appPageTool.o\
+		appPageLayoutTool.o\
+		appOptionmenuMotif.o\
+		appOptionmenuGtk.o\
+		appMetricRuler.o\
+		appMetafileX11.o\
+		appMetafilePs.o\
+		appMenuMotif.o\
+		appMenuGtk.o\
+		appMenu.o\
+		appMarginTool.o\
+		appMain.o\
+		appMailDialog.o\
+		appMacPictX11.o\
+		appMacPictPs.o\
+		appMacPict.o\
+		appListMotif.o\
+		appListGtk.o\
+		appLabelMotif.o\
+		appLabelGtk.o\
+		appKeystrokeMotif.o\
+		appInspectorMotif.o\
+		appInspectorGtk.o\
+		appInspector.o\
+		appImage.o\
+		appIconsMotif.o\
+		appIconsGtk.o\
+		appGuiUtil.o\
+		appGuiMotif.o\
+		appGuiGtkX.o\
+		appGuiGtk.o\
+		appGetImageMotif.o\
+		appGetImageGtk.o\
+		appFrameMotif.o\
+		appFontTool.o\
+		appFont.o\
+		appFindTool.o\
+		appFileChooserMotif.o\
+		appFileChooserGtk.o\
+		appFileChooser.o\
+		appEventMotif.o\
+		appEventGtk.o\
+		appEncodingMenu.o\
+		appDrawnPulldownMotif.o\
+		appDrawnPulldownGtk.o\
+		appDrawnPulldown.o\
+		appDrawX11.o\
+		appDrawPage.o\
+		appDrawMotif.o\
+		appDrawGtk.o\
+		appDocumentMotif.o\
+		appDocumentGtk.o\
+		appDocument.o\
+		appDocMetricRuler.o\
+		appDialogMotif.o\
+		appDialogGtk.o\
+		appCopyPasteMotif.o\
+		appCopyPasteGtk.o\
+		appColorMotif.o\
+		appColorGtk.o\
+		appColorChooser.o
+
+../lib/appFrame.a:	$(OBS)
+	ar ruv $@ $(OBS) && @RANLIB@ $@
+
+#
+#  This is cyclic, but at least it documents what extra autoconf configuration
+#  is used in this directory:
+#
+ACLOCAL=			\
+	../configure/gtk.m4	\
+	../configure/xpm.m4	\
+	../configure/motif.m4	\
+	../configure/prefix.m4	\
+	../configure/gui.m4
+
+aclocal.m4:	$(ACLOCAL)
+	cat $(ACLOCAL) > $@
+
+# deps -I../include -I../bitmap -I../ind -I../appFrame -I../appUtil -I/usr/X11R6/include
+################################# !! sh
+
+appColorChooser.o: \
+    appColorChooser.c \
+    appFrameConfig.h \
+    ../appFrame/appColorChooser.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appDraw.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/psFont.h \
+    ../appUtil/sioGeneral.h \
+    ../bitmap/bmcolor.h \
+    appFrame.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appInspector.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appColorGtk.o: \
+    appColorGtk.c \
+    appFrameConfig.h \
+    appDraw.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/psFont.h \
+    ../appUtil/sioGeneral.h \
+    ../bitmap/bmcolor.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appColorMotif.o: \
+    appColorMotif.c \
+    appFrameConfig.h \
+    appDraw.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/psFont.h \
+    ../appUtil/sioGeneral.h \
+    ../bitmap/bmcolor.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appCopyPasteGtk.o: \
+    appCopyPasteGtk.c \
+    appFrameConfig.h \
+    ../appFrame/appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appCopyPasteMotif.o: \
+    appCopyPasteMotif.c \
+    appFrameConfig.h \
+    ../appFrame/appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appDialogGtk.o: \
+    appDialogGtk.c \
+    appFrameConfig.h \
+    appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../appUtil/appSystem.h \
+    ../appUtil/appGeoString.h
+
+appDialogMotif.o: \
+    appDialogMotif.c \
+    appFrameConfig.h \
+    appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../appUtil/appSystem.h \
+    ../appUtil/appGeoString.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appDocMetricRuler.o: \
+    appDocMetricRuler.c \
+    appFrameConfig.h \
+    ../appFrame/appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../appFrame/appMetricRuler.h \
+    ../appFrame/appRuler.h \
+    ../appUtil/appUnit.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appDocument.o: \
+    appDocument.c \
+    appFrameConfig.h \
+    ../appUtil/appSystem.h \
+    ../appUtil/utilFontmap.h \
+    ../appUtil/utilT1Entries.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/sioGeneral.h \
+    appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appDocumentGtk.o: \
+    appDocumentGtk.c \
+    appFrameConfig.h \
+    appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appDocumentMotif.o: \
+    appDocumentMotif.c \
+    appFrameConfig.h \
+    appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appDrawGtk.o: \
+    appDrawGtk.c \
+    appFrameConfig.h \
+    ../appUtil/geo2DInteger.h \
+    appDraw.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/psFont.h \
+    ../appUtil/sioGeneral.h \
+    ../bitmap/bmcolor.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appDrawMotif.o: \
+    appDrawMotif.c \
+    appFrameConfig.h \
+    ../appUtil/geo2DInteger.h \
+    appDraw.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/psFont.h \
+    ../appUtil/sioGeneral.h \
+    ../bitmap/bmcolor.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appDrawPage.o: \
+    appDrawPage.c \
+    appFrameConfig.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h \
+    ../appFrame/appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../appUtil/appUnit.h \
+    ../appUtil/appGeoString.h
+
+appDrawX11.o: \
+    appDrawX11.c \
+    appFrameConfig.h \
+    ../appFrame/appDraw.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/psFont.h \
+    ../appUtil/sioGeneral.h \
+    ../bitmap/bmcolor.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appDrawnPulldown.o: \
+    appDrawnPulldown.c \
+    appFrameConfig.h \
+    appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../appUtil/appSystem.h \
+    ../appUtil/appGeoString.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appDrawnPulldownGtk.o: \
+    appDrawnPulldownGtk.c \
+    appFrameConfig.h \
+    appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../appUtil/appSystem.h \
+    ../appUtil/appGeoString.h
+
+appDrawnPulldownMotif.o: \
+    appDrawnPulldownMotif.c \
+    appFrameConfig.h \
+    appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../appUtil/appSystem.h \
+    ../appUtil/appGeoString.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appEncodingMenu.o: \
+    appEncodingMenu.c \
+    ../appFrame/appEncodingMenu.h \
+    ../appFrame/appFrameConfig.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/sioGeneral.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appFrame.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appEventGtk.o: \
+    appEventGtk.c \
+    appFrameConfig.h \
+    ../appUtil/geo2DInteger.h \
+    appDraw.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/psFont.h \
+    ../appUtil/sioGeneral.h \
+    ../bitmap/bmcolor.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appEventMotif.o: \
+    appEventMotif.c \
+    appFrameConfig.h \
+    ../appUtil/geo2DInteger.h \
+    appDraw.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/psFont.h \
+    ../appUtil/sioGeneral.h \
+    ../bitmap/bmcolor.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appFileChooser.o: \
+    appFileChooser.c \
+    appFrameConfig.h \
+    ../appUtil/appSystem.h \
+    ../appUtil/sioStdio.h \
+    ../appUtil/sioGeneral.h \
+    ../appFrame/appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h \
+    appFileChooser.h
+
+appFileChooserGtk.o: \
+    appFileChooserGtk.c \
+    appFrameConfig.h \
+    ../appUtil/appSystem.h \
+    ../appFrame/appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h \
+    appFileChooser.h
+
+appFileChooserMotif.o: \
+    appFileChooserMotif.c \
+    appFrameConfig.h \
+    ../appUtil/appSystem.h \
+    ../appFrame/appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h \
+    appFileChooser.h
+
+appFindTool.o: \
+    appFindTool.c \
+    appFrameConfig.h \
+    appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appFont.o: \
+    appFont.c \
+    appFrameConfig.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/utilMatchFont.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/psFont.h \
+    ../appUtil/sioGeneral.h \
+    appDraw.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appUtil/geo2DInteger.h \
+    ../bitmap/bmcolor.h \
+    ../bitmap/bitmap.h
+
+appFontTool.o: \
+    appFontTool.c \
+    appFrameConfig.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h \
+    ../appUtil/appUnit.h \
+    ../appUtil/appGeoString.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/utilTree.h \
+    ../appFrame/appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../appFrame/appFontTool.h \
+    ../appFrame/docExpandedTextAttribute.h \
+    ../appFrame/appEncodingMenu.h \
+    ../appFrame/appFrameConfig.h \
+    ../appFrame/appColorChooser.h \
+    appDraw.h
+
+appFrameMotif.o: \
+    appFrameMotif.c \
+    appFrameConfig.h \
+    appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../appUtil/appSystem.h \
+    ../appUtil/appGeoString.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appGetImageGtk.o: \
+    appGetImageGtk.c \
+    appFrameConfig.h \
+    ../appUtil/utilEndian.h \
+    ../appFrame/appImage.h \
+    ../bitmap/bitmap.h \
+    ../appUtil/sioGeneral.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appDraw.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/psFont.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appGetImageMotif.o: \
+    appGetImageMotif.c \
+    appFrameConfig.h \
+    ../appUtil/utilEndian.h \
+    ../appFrame/appImage.h \
+    ../bitmap/bitmap.h \
+    ../appUtil/sioGeneral.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appDraw.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/psFont.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appGuiGtk.o: \
+    appGuiGtk.c \
+    appFrameConfig.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appGuiGtkX.o: \
+    appGuiGtkX.c \
+    appFrameConfig.h \
+    ../appUtil/appSystem.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appGuiMotif.o: \
+    appGuiMotif.c \
+    appFrameConfig.h \
+    appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../appUtil/appSystem.h \
+    ../appUtil/appGeoString.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appGuiUtil.o: \
+    appGuiUtil.c \
+    appFrameConfig.h \
+    appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../appUtil/appSystem.h \
+    ../appUtil/appGeoString.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appIconsGtk.o: \
+    appIconsGtk.c \
+    appFrameConfig.h \
+    appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    appIcons.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appIconsMotif.o: \
+    appIconsMotif.c \
+    appFrameConfig.h \
+    appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    appIcons.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appImage.o: \
+    appImage.c \
+    appFrameConfig.h \
+    appImage.h \
+    ../bitmap/bitmap.h \
+    ../appUtil/sioGeneral.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appDraw.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/psFont.h \
+    ../appFrame/appFrame.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appInspector.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appInspector.o: \
+    appInspector.c \
+    appFrameConfig.h \
+    ../appFrame/appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../appFrame/appRgbChooserPage.h \
+    ../appFrame/appRgbCube.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appInspectorGtk.o: \
+    appInspectorGtk.c \
+    appFrameConfig.h \
+    appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../appUtil/appSystem.h \
+    ../appUtil/appGeoString.h
+
+appInspectorMotif.o: \
+    appInspectorMotif.c \
+    appFrameConfig.h \
+    appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../appUtil/appSystem.h \
+    ../appUtil/appGeoString.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appKeystrokeMotif.o: \
+    appKeystrokeMotif.c \
+    appFrameConfig.h \
+    appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../include/charnames.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appLabelGtk.o: \
+    appLabelGtk.c \
+    appFrameConfig.h \
+    appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../appUtil/appSystem.h \
+    ../appUtil/appGeoString.h
+
+appLabelMotif.o: \
+    appLabelMotif.c \
+    appFrameConfig.h \
+    appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../appUtil/appSystem.h \
+    ../appUtil/appGeoString.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appListGtk.o: \
+    appListGtk.c \
+    appFrameConfig.h \
+    appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../appUtil/appSystem.h \
+    ../appUtil/appGeoString.h
+
+appListMotif.o: \
+    appListMotif.c \
+    appFrameConfig.h \
+    appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../appUtil/appSystem.h \
+    ../appUtil/appGeoString.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appMacPict.o: \
+    appMacPict.c \
+    appFrameConfig.h \
+    ../appFrame/appMacPict.h \
+    ../bitmap/bitmap.h \
+    ../appUtil/sioGeneral.h \
+    ../bitmap/bmcolor.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/psFont.h \
+    ../appFrame/appDraw.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appUtil/geo2DInteger.h \
+    ../appFrame/appImage.h \
+    ../appFrame/appMetafile.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/sioEndian.h \
+    ../appUtil/utilEndian.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appMacPictPs.o: \
+    appMacPictPs.c \
+    appFrameConfig.h \
+    ../appFrame/appMacPict.h \
+    ../bitmap/bitmap.h \
+    ../appUtil/sioGeneral.h \
+    ../bitmap/bmcolor.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/psFont.h \
+    ../appFrame/appDraw.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appUtil/geo2DInteger.h \
+    ../appFrame/appImage.h \
+    ../appFrame/appMetafile.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilMatchFont.h \
+    ../appUtil/sioEndian.h \
+    ../appUtil/utilEndian.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appMacPictX11.o: \
+    appMacPictX11.c \
+    appFrameConfig.h \
+    ../appFrame/appMacPict.h \
+    ../bitmap/bitmap.h \
+    ../appUtil/sioGeneral.h \
+    ../bitmap/bmcolor.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/psFont.h \
+    ../appFrame/appDraw.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appUtil/geo2DInteger.h \
+    ../appFrame/appImage.h \
+    ../appFrame/appMetafile.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/sioEndian.h \
+    ../appUtil/utilEndian.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appMailDialog.o: \
+    appMailDialog.c \
+    appFrameConfig.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h \
+    ../appFrame/appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../appUtil/sioSmtp.h \
+    ../appUtil/appSystem.h
+
+appMain.o: \
+    appMain.c \
+    appFrameConfig.h \
+    ../appUtil/appSystem.h \
+    ../appFrame/appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../appUtil/appUnit.h \
+    ../appUtil/appPaper.h \
+    ../appUtil/appGeoString.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appMarginTool.o: \
+    appMarginTool.c \
+    appFrameConfig.h \
+    ../appUtil/utilPropMask.h \
+    ../appFrame/appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    appMarginTool.h \
+    ../appUtil/appUnit.h \
+    ../appUtil/appGeoString.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appMenu.o: \
+    appMenu.c \
+    appFrameConfig.h \
+    appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appMenuGtk.o: \
+    appMenuGtk.c \
+    appFrameConfig.h \
+    appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appMenuMotif.o: \
+    appMenuMotif.c \
+    appFrameConfig.h \
+    appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appMetafilePs.o: \
+    appMetafilePs.c \
+    appFrameConfig.h \
+    ../appFrame/appMetafile.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../bitmap/bitmap.h \
+    ../appUtil/sioGeneral.h \
+    ../bitmap/bmcolor.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/psFont.h \
+    ../appFrame/appDraw.h \
+    ../appUtil/geo2DInteger.h \
+    ../appFrame/appImage.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/sioEndian.h \
+    ../appUtil/utilEndian.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appMetafileX11.o: \
+    appMetafileX11.c \
+    appFrameConfig.h \
+    ../appFrame/appMetafile.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../bitmap/bitmap.h \
+    ../appUtil/sioGeneral.h \
+    ../bitmap/bmcolor.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/psFont.h \
+    ../appFrame/appDraw.h \
+    ../appUtil/geo2DInteger.h \
+    ../appFrame/appImage.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/sioEndian.h \
+    ../appUtil/utilEndian.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appMetricRuler.o: \
+    appMetricRuler.c \
+    appFrameConfig.h \
+    ../appFrame/appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../appFrame/appMetricRuler.h \
+    ../appFrame/appRuler.h \
+    ../appUtil/appUnit.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appOptionmenuGtk.o: \
+    appOptionmenuGtk.c \
+    appFrameConfig.h \
+    appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../appUtil/appSystem.h \
+    ../appUtil/appGeoString.h
+
+appOptionmenuMotif.o: \
+    appOptionmenuMotif.c \
+    appFrameConfig.h \
+    appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../appUtil/appSystem.h \
+    ../appUtil/appGeoString.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appPageLayoutTool.o: \
+    appPageLayoutTool.c \
+    appFrameConfig.h \
+    ../appUtil/appGeoString.h \
+    ../appUtil/appUnit.h \
+    appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    appPageLayoutTool.h \
+    ../appUtil/appPaper.h \
+    ../appFrame/appPaperChooser.h \
+    ../appFrame/appFrame.h \
+    ../appFrame/appMarginTool.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appPageTool.o: \
+    appPageTool.c \
+    appFrameConfig.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h \
+    ../appFrame/appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../appUtil/appUnit.h \
+    ../appUtil/appGeoString.h \
+    ../appUtil/appPaper.h \
+    appPaperChooser.h \
+    appMarginTool.h
+
+appPaperChooser.o: \
+    appPaperChooser.c \
+    appFrameConfig.h \
+    ../appUtil/appGeoString.h \
+    ../appUtil/appPaper.h \
+    appPaperChooser.h \
+    ../appFrame/appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appPrintDialog.o: \
+    appPrintDialog.c \
+    appFrameConfig.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h \
+    ../appFrame/appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../appUtil/appUnit.h \
+    ../appUtil/appGeoString.h \
+    appPaperChooser.h \
+    ../appUtil/appPaper.h
+
+appPrintDocument.o: \
+    appPrintDocument.c \
+    appFrameConfig.h \
+    ../appUtil/appSystem.h \
+    ../appUtil/sioPipe.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/sioFd.h \
+    ../appUtil/sioStdout.h \
+    ../appUtil/sioStdio.h \
+    ../appUtil/appPaper.h \
+    appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appPutImageGtk.o: \
+    appPutImageGtk.c \
+    appFrameConfig.h \
+    appImage.h \
+    ../bitmap/bitmap.h \
+    ../appUtil/sioGeneral.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appDraw.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/psFont.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appPutImageMotif.o: \
+    appPutImageMotif.c \
+    appFrameConfig.h \
+    appImage.h \
+    ../bitmap/bitmap.h \
+    ../appUtil/sioGeneral.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appDraw.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/psFont.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appQuestion.o: \
+    appQuestion.c \
+    appFrameConfig.h \
+    ../appFrame/appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appReally.o: \
+    appReally.c \
+    appFrameConfig.h \
+    ../appFrame/appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appResource.o: \
+    appResource.c \
+    appFrameConfig.h \
+    ../appUtil/appSystem.h \
+    ../appUtil/utilTree.h \
+    ../appUtil/utilProperties.h \
+    ../appFrame/appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appRgbChooserPage.o: \
+    appRgbChooserPage.c \
+    appFrameConfig.h \
+    appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    appRgbChooserPage.h \
+    ../appFrame/appFrame.h \
+    ../appFrame/appRgbCube.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appRgbCube.o: \
+    appRgbCube.c \
+    appFrameConfig.h \
+    ../appFrame/appRgbCube.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appDraw.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/psFont.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilAffineTransform.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appRuler.o: \
+    appRuler.c \
+    appFrameConfig.h \
+    ../appUtil/appUnit.h \
+    ../appFrame/appRuler.h \
+    ../appFrame/appDraw.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/psFont.h \
+    ../appUtil/sioGeneral.h \
+    ../bitmap/bmcolor.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appScrollDocument.o: \
+    appScrollDocument.c \
+    appFrameConfig.h \
+    ../appUtil/appSystem.h \
+    appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appSpellTool.o: \
+    appSpellTool.c \
+    appFrameConfig.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h \
+    appSpellTool.h \
+    ../ind/ind.h \
+    ../appFrame/appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../appUtil/appSystem.h \
+    ../include/charnames.h
+
+appSymbolPicker.o: \
+    appSymbolPicker.c \
+    appFrameConfig.h \
+    ../appFrame/appSymbolPicker.h \
+    ../appFrame/appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../appFrame/docExpandedTextAttribute.h \
+    ../appFrame/appEncodingMenu.h \
+    ../appFrame/appFrameConfig.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appTextGtk.o: \
+    appTextGtk.c \
+    appFrameConfig.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h \
+    appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../appUtil/appSystem.h \
+    ../appUtil/appGeoString.h
+
+appTextMotif.o: \
+    appTextMotif.c \
+    appFrameConfig.h \
+    appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../appUtil/appSystem.h \
+    ../appUtil/appGeoString.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appTextUtil.o: \
+    appTextUtil.c \
+    appFrameConfig.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h \
+    appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../appUtil/appSystem.h \
+    ../appUtil/appGeoString.h
+
+appTree.o: \
+    appTree.c \
+    appFrameConfig.h \
+    appTree.h \
+    ../appFrame/appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appWinMeta.o: \
+    appWinMeta.c \
+    appFrameConfig.h \
+    ../appFrame/appWinMeta.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../bitmap/bitmap.h \
+    ../appUtil/sioGeneral.h \
+    ../bitmap/bmcolor.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/psFont.h \
+    ../appFrame/appDraw.h \
+    ../appUtil/geo2DInteger.h \
+    ../appFrame/appImage.h \
+    ../appFrame/appMetafile.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilMatchFont.h \
+    ../appUtil/sioEndian.h \
+    ../appUtil/utilEndian.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appWinMetaImg.o: \
+    appWinMetaImg.c \
+    appFrameConfig.h \
+    ../appFrame/appWinMeta.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../bitmap/bitmap.h \
+    ../appUtil/sioGeneral.h \
+    ../bitmap/bmcolor.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/psFont.h \
+    ../appFrame/appDraw.h \
+    ../appUtil/geo2DInteger.h \
+    ../appFrame/appImage.h \
+    ../appFrame/appMetafile.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/sioEndian.h \
+    ../appUtil/utilEndian.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appWinMetaPs.o: \
+    appWinMetaPs.c \
+    appFrameConfig.h \
+    ../appFrame/appWinMeta.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../bitmap/bitmap.h \
+    ../appUtil/sioGeneral.h \
+    ../bitmap/bmcolor.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/psFont.h \
+    ../appFrame/appDraw.h \
+    ../appUtil/geo2DInteger.h \
+    ../appFrame/appImage.h \
+    ../appFrame/appMetafile.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilMatchFont.h \
+    ../appUtil/sioEndian.h \
+    ../appUtil/utilEndian.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appWinMetaX11.o: \
+    appWinMetaX11.c \
+    appFrameConfig.h \
+    ../appFrame/appWinMeta.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../bitmap/bitmap.h \
+    ../appUtil/sioGeneral.h \
+    ../bitmap/bmcolor.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/psFont.h \
+    ../appFrame/appDraw.h \
+    ../appUtil/geo2DInteger.h \
+    ../appFrame/appImage.h \
+    ../appFrame/appMetafile.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/sioEndian.h \
+    ../appUtil/utilEndian.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appXvCopyPaste.o: \
+    appXvCopyPaste.c \
+    appFrameConfig.h \
+    ../appFrame/sioXprop.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appUtil/sioGeneral.h \
+    ../appFrame/appImage.h \
+    ../bitmap/bitmap.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appDraw.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/psFont.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+appZoomMenu.o: \
+    appZoomMenu.c \
+    appFrameConfig.h \
+    ../appFrame/appFrame.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appFrame/appGuiResource.h \
+    ../appUtil/geo2DInteger.h \
+    ../appUtil/utilPs.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/utilDocumentGeometry.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/psFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/utilPostscriptFace.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appUtil/utilAffineTransform.h \
+    ../appUtil/utilNup.h \
+    ../appUtil/utilPrinter.h \
+    ../appUtil/utilMailContent.h \
+    ../appFrame/appIcons.h \
+    ../appFrame/appTool.h \
+    ../appFrame/appDraw.h \
+    ../bitmap/bmcolor.h \
+    ../appFrame/appInspector.h \
+    ../appFrame/appZoomMenu.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+docExpandedTextAttribute.o: \
+    docExpandedTextAttribute.c \
+    appFrameConfig.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h \
+    ../appUtil/utilPropMask.h \
+    ../appUtil/utilTextAttribute.h \
+    ../appFrame/docExpandedTextAttribute.h \
+    ../appUtil/utilDocFont.h \
+    ../appUtil/utilFontEncoding.h \
+    ../appUtil/psFont.h \
+    ../appUtil/sioGeneral.h \
+    ../bitmap/bmcolor.h
+
+sioCopyPasteGtk.o: \
+    sioCopyPasteGtk.c \
+    appFrameConfig.h \
+    ../appFrame/sioXprop.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appUtil/sioGeneral.h \
+    ../appUtil/sioMemory.h \
+    ../appUtil/utilMemoryBuffer.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+sioCopyPasteMotif.o: \
+    sioCopyPasteMotif.c \
+    appFrameConfig.h \
+    ../appFrame/sioXprop.h \
+    ../appFrame/appGuiBase.h \
+    ../appFrame/appGuiBaseMotif.h \
+    ../appFrame/appGuiBaseGtk.h \
+    ../appUtil/sioGeneral.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+

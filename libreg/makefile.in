@@ -1,0 +1,45 @@
+CC=@CC@
+INCLUDES=-I../include -I.
+CFLAGS=@CFLAGS@ $(INCLUDES)
+
+WFLAGS=	-Wall			\
+	-pedantic		\
+	-Wpointer-arith		\
+	-Wstrict-prototypes	\
+	-Wmissing-declarations	\
+	-Wnested-externs	\
+	-Wshadow		\
+	-Wmissing-prototypes
+
+#CFLAGS	= $(WFLAGS) @CFLAGS@ $(INCLUDES)
+
+# 4 lines
+OBS	=	\
+		regsub.o\
+		regexp.o
+
+LIB=	../lib/reg.a
+INC=	../include/reg.h
+
+$(LIB):	$(OBS)
+	ar r $@ $(OBS) && @RANLIB@ $@
+
+# deps -I../include
+######################################## !! sh
+
+regexp.o: \
+    regexp.c \
+    libregConfig.h \
+    ../include/reg.h \
+    regmagic.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+regsub.o: \
+    regsub.c \
+    libregConfig.h \
+    ../include/reg.h \
+    regmagic.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+

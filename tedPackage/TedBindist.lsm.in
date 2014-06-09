@@ -1,0 +1,18 @@
+Begin3
+Title:          @BINDIST@
+Version:        2.17
+Entered-date:   28JAN04
+Description:    Ted is an easy rich text processor. It can edit RTF files
+		in a wysiwyg manner. It supports multiple fonts and can
+		print to PostScript printers.
+		It consists of a general part: The program, afm files
+		and an American spelling checker.
+		Additional packages with spell checkers for different
+		languages exist.
+		This package is the general part, compiled for @PLATFORM@
+Keywords:       RTF text spelling
+Author:         Mark de Does
+Maintained-by:  Mark de Does
+Primary-site:   http://www.nllgg.nl/Ted/index.html
+Copying-policy: GPL
+End

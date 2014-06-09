@@ -1,0 +1,26 @@
+#!/bin/sh
+
+set -e -u
+
+DIR=`pwd`/pkgscratch
+rm -rf $DIR
+mkdir $DIR
+
+PKGFILE=Ted_2.17_@PLATFORM@.pkg
+
+tar xvf TedBindist.tar
+cp ../Ted/Ted.static bin/Ted
+chmod 755 bin/Ted
+pkgmk -o -b . -f ./Ted.prototype -r . -d $DIR
+
+#/usr/sbin/pkgchk -d $DIR Ted
+
+pkgtrans -o -s $DIR `pwd`/$PKGFILE all
+
+gzip < $PKGFILE > $PKGFILE.gz
+
+ls -l $PKGFILE $PKGFILE.gz
+
+#/usr/sbin/pkgchk -d $PKGFILE Ted
+
+rm -rf $DIR Ted bin afm ind

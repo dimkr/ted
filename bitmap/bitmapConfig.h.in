@@ -1,0 +1,67 @@
+#   ifndef	BITMAP_CONFIG_H
+#   define	BITMAP_CONFIG_H
+
+/* Define to empty if the keyword does not work.  */
+#undef const
+
+/* Define if you have the ANSI C header files.  */
+#undef STDC_HEADERS
+
+/* Define if your processor stores words with the most significant
+   byte first (like Motorola and SPARC, unlike Intel and VAX).  */
+#undef WORDS_BIGENDIAN
+
+/* Define if you have the socket function.  */
+#undef HAVE_SOCKET
+
+/* Define if you have the strerror function.  */
+#undef HAVE_STRERROR
+
+/* Define if you have the uname function.  */
+#undef HAVE_UNAME
+
+/* Define if you have the <fcntl.h> header file.  */
+#undef HAVE_FCNTL_H
+
+/* Define if you have the <sys/time.h> header file.  */
+#undef HAVE_SYS_TIME_H
+
+/* Define if you have the <unistd.h> header file.  */
+#undef HAVE_UNISTD_H
+
+#undef SIZEOF_SHORT
+#undef SIZEOF_INT
+#undef SIZEOF_LONG
+#undef SIZEOF_UNSIGNED_SHORT
+#undef SIZEOF_UNSIGNED_INT
+#undef SIZEOF_UNSIGNED_LONG
+
+#   if SIZEOF_UNSIGNED_SHORT == 2
+	typedef unsigned short	BmUint16;
+#   else
+#	if SIZEOF_UNSIGNED_INT == 2
+	typedef unsigned int	BmUint16;
+#	else
+	What else can be a 16 bit integer?
+#	endif
+#   endif
+
+#   if SIZEOF_UNSIGNED_INT == 4
+	typedef unsigned int	BmUint32;
+#   else
+#	if SIZEOF_UNSIGNED_LONG == 4
+	typedef unsigned long	BmUint32;
+#	else
+	What else can be a 32 bit integer?
+#	endif
+#   endif
+
+/************************************************/
+/*  Libraries that are (Un)Available.		*/
+/************************************************/
+#   undef	JPEG_FOUND
+#   undef	TIFF_FOUND
+#   undef	PNG_FOUND
+#   undef	XPM_FOUND
+
+#   endif	/*  BITMAP_CONFIG_H  */

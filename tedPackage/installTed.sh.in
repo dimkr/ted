@@ -1,0 +1,320 @@
+#!/bin/sh
+
+NONL_B=-n
+NONL_E=
+
+DOYOU='Do you want to install package'
+
+#
+#   Intallation directory. As this value is compiled into
+#   the 'Ted' executable as well ( see appFrame/config.h.in )
+#   changing this value will result in an installation that does
+#   not work.
+#
+#
+#   In a normal installation, only run as root.
+#
+
+INSTALL_KIND=ROOT
+
+case $RPM_BUILD_ROOT in
+    ?*)
+	INSTALL_KIND=RPM
+	;;
+    *)
+	case $# in
+	    1)
+		if  test x_$1 = x_PRIVATE
+		then
+		    INSTALL_KIND=HOME
+		    shift
+		fi
+		;;
+	    *)
+		;;
+	esac
+	;;
+esac
+
+case $INSTALL_KIND in
+    RPM)
+	I_PREFIX=${RPM_BUILD_ROOT}@I_PREFIX@
+	XROOT=${RPM_BUILD_ROOT}
+	;;
+    ROOT)
+	I_PREFIX=@I_PREFIX@
+	XROOT=/
+
+	ID=`id`
+	case $ID in
+	    uid=0\(root\)\ gid=0\(root\)\ *)
+		# What you ususlly get when you log in as root.
+		;;
+	    uid=0\(root\)\ *)
+		# Must be sufficient.
+		;;
+	    *)
+		echo 'id:' $ID
+		echo '*   To install Ted for everyone you must be root'
+		echo '*   For a private install use:' $0 'PRIVATE' $*
+		exit 1
+		;;
+	esac
+	;;
+    HOME)
+	I_PREFIX=${HOME}
+	XROOT=/is/irrelevant
+	;;
+    *)
+	echo INSTALL_KIND=$INSTALL_KIND
+	exit 1
+	;;
+esac
+
+#
+#   Make file permissions independent on the private settings of
+#   the caller.
+#
+umask 000
+
+#
+#   Remember where we are, the packages are supposed to reside
+#   in the same directory.
+#
+DIR=`echo $0 | sed -n -e 's!/[^/]*$!!p'`
+case $DIR in
+    ?*)
+	HERE=`( cd $DIR >/dev/null 2>&1 && pwd )`
+	;;
+    *)
+	HERE=`pwd`
+	;;
+esac
+
+#
+#   Finish a private install
+#
+finishPrivate()
+    {
+    say=no
+
+    if  test -f ${I_PREFIX}/Ted/TedDocument-en_US.rtf
+    then
+	say=yes
+    fi
+    if  test -d ${I_PREFIX}/afm
+    then
+	say=yes
+    fi
+    if  test -d ${I_PREFIX}/ind
+    then
+	say=yes
+    fi
+
+    if  test $say = yes
+    then
+	echo ========= Include the following in $HOME/.Xdefaults =========
+	if  test -f ${I_PREFIX}/Ted/TedDocument-en_US.rtf
+	then
+	    echo Ted.documentFileName: ${I_PREFIX}/Ted/TedDocument-en_US.rtf
+	fi
+	if  test -d ${I_PREFIX}/afm
+	then
+	    echo Ted.afmDirectory: ${I_PREFIX}/afm
+	fi
+	if  test -d ${I_PREFIX}/ind
+	then
+	    echo Ted.spellToolSystemDicts: ${I_PREFIX}/ind
+	fi
+    fi
+    }
+
+#
+#   Actually install a package
+#
+install()
+    {
+    if  test ! -f $HERE/$1.tar.gz
+    then
+	echo $HERE/$1.tar.gz does not exist.
+	exit 1
+    fi
+
+    if  test $INSTALL_KIND != HOME
+    then
+	if  test -f ${I_PREFIX}/Ted/ad/$1.ad.tar
+	then
+	    rm Ted/ad/$1.ad.tar
+	fi
+    fi
+
+    (	cd ${I_PREFIX}		&& \
+	cat $HERE/$1.tar.gz	|  \
+	gzip -d			|  \
+	tar mxvf -		)
+
+    if  test $INSTALL_KIND != HOME
+    then
+	if  test -f ${I_PREFIX}/Ted/ad/$1.ad.tar
+	then
+	    ( cd $XROOT && tar mxvf ${I_PREFIX}/Ted/ad/$1.ad.tar )
+	fi
+    fi
+    }
+
+#
+#   Let the user decide whether she wants to install a package.
+#
+ask()
+    {
+    answer='?'
+
+    while true
+    do
+	echo $NONL_B $DOYOU $1 '? [yes|no|quit] ' $NONL_E
+
+	if  read answer
+	then
+	    case $answer in
+		y|yes)
+		    install $1
+		    break
+		    ;;
+		n|no)
+		    break
+		    ;;
+		q|quit)
+		    break 2
+		    ;;
+		*)
+		    continue
+		    ;;
+	    esac
+	fi
+
+    done
+    }
+
+#
+#   If the installation directory does not exist make it.
+#
+
+if test ! -d ${I_PREFIX}
+then
+    if  mkdir ${I_PREFIX}		&&
+        chown @CHOWN_ARG@ ${I_PREFIX}	&&
+        chmod 755 ${I_PREFIX}
+    then
+	echo made `ls -ld ${I_PREFIX}`
+    else
+	echo failed to make directory ${I_PREFIX}
+	exit 1
+    fi
+fi
+
+case $# in
+    0)
+	: Default case .. interactive install
+	echo -n test > /tmp/$$.echo
+	if  grep n /tmp/$$.echo > /dev/null
+	then
+	    NONL_B=
+	    NONL_E=\\c
+	fi
+	rm -f /tmp/$$.echo
+	;;
+    1)
+	: Install a particular package without asking
+	:
+	if  test x_$1 = x_COMMON
+	then
+	    SOURCE=@BINDIST@
+	else
+	    SOURCE=$1
+	fi
+
+	install ${SOURCE}
+
+	if  test $INSTALL_KIND = HOME
+	then
+	    finishPrivate
+	fi
+
+	exit 0
+	;;
+    *)
+	echo 'Usage' \"$0\"
+	echo 'or   ' \"$0 something\" for something.tar.gz
+	;;
+esac
+
+#
+#   Let the user select packages that she wants to install.
+#
+
+FOUND_SOMETHING=NO
+
+for pkg in	@BINDIST@	\
+		Ted_nl_NL	\
+		Ted_en_GB	\
+		Ted_de_DE	\
+		Ted_es_ES	\
+		Ted_es_AR	\
+		Ted_pt_PT	\
+		Ted_pt_BR	\
+		Ted_fr_FR	\
+		Ted_it_IT	\
+		Ted_cs_CZ	\
+		Ted_da_DK	\
+		Ted_sv_SE	\
+		Ted_no_NO	\
+		Ted_pl_PL	\
+		Ted_hu_HU	\
+		Ted_mg_MG	\
+		Ted_oc_FR	\
+		Ted_eu_FR
+do
+    if  test -f $HERE/$pkg.tar.gz
+    then
+	echo
+
+	if  test -f $HERE/$pkg.lsm
+	then
+	    sed -n -e	'/^Description/,/^[^ 	]/p'	\
+			    $HERE/$pkg.lsm		|
+	    sed -e	's/Description:/ /'		\
+		-e	'/^[^ 	]/d'			\
+		-e	's/[ 	]*/	/'
+	fi
+
+	echo
+
+	FOUND_SOMETHING=YES
+	ask $pkg
+    fi
+done
+
+if  test $FOUND_SOMETHING = NO
+then
+    echo
+    echo WARNING: No Ted distributions found in \"$HERE\"
+fi
+
+if  test $INSTALL_KIND = HOME
+then
+    finishPrivate
+fi
+
+case `type Ted` in
+    'Ted is ${I_PREFIX}/bin/Ted')
+	;;
+    *)
+	echo
+	echo
+	if  test -f ${I_PREFIX}/bin/Ted
+	then
+	    echo Do not forget to include ${I_PREFIX}/bin in your PATH.
+	else
+	    echo Ted is not installed as ${I_PREFIX}/bin/Ted.
+	fi
+esac

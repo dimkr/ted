@@ -1,0 +1,72 @@
+
+Ted is an easy rich text processor for X Windows
+================================================
+
+Introduction
+------------
+
+Ted can edit RTF files in a wysiwyg manner. It supports multiple fonts 
+and can print to PostScript printers.
+
+The current version is 2.17.
+
+More elaborate material is available through the web site: 
+http://www.nllgg.nl/Ted. The web site makes this concise README file obsolete.
+The full Ted manual is available from the download site in various 
+file formats: TedDocument-en_US.{rtf,html,pdf,txt}
+
+You can try to download Ted from one of the following locations:
+*   ftp://ftp.nluug.nl/pub/editors/ted
+*   http://www.nllgg.nl/Ted
+
+Ted is free software. I assume no responsibility for the consequences 
+of using it. It is up to you to decide whether Ted suits your purpose 
+or not.
+
+Ready to Install Packages, Installation
+---------------------------------------
+
+Ready to install packages include a general part: The program, afm 
+files and an American spelling checker. Additional packages with spell 
+checkers for different languages exist.
+
+The following packages exist:
+-   Ted_2.17_Linux_ix86.tar.gz: ted-2.17-1.i386.rpm	The program, American spelling.
+-   ted-2.17.src.tar.gz:	ted-2.17-1.src.rpm		Source code.
+-   Ted_cs_CZ.tar.gz ted_cs_CZ-2.17-1.noarch.rpm	Czech resources
+-   Ted_da_DK.tar.gz ted_da_DK-2.17-1.noarch.rpm	Danish resources
+-   Ted_de_DE.tar.gz ted_de_DE-2.17-1.noarch.rpm	German resources
+-   Ted_en_GB.tar.gz ted_en_GB-2.17-1.noarch.rpm	British resources
+-   Ted_es_ES.tar.gz ted_es_ES-2.17-1.noarch.rpm	Spanish resources
+-   Ted_fr_FR.tar.gz ted_fr_FR-2.17-1.noarch.rpm	French resources
+-   Ted_it_IT.tar.gz ted_it_IT-2.17-1.noarch.rpm	Italian resources
+-   Ted_nl_NL.tar.gz ted_nl_NL-2.17-1.noarch.rpm	Dutch resources
+-   Ted_no_NO.tar.gz ted_no_NO-2.17-1.noarch.rpm	Norwegian resources
+-   Ted_pl_PL.tar.gz ted_pl_PL-2.17-1.noarch.rpm	Polish resources
+-   Ted_pt_PT.tar.gz ted_pt_PT-2.17-1.noarch.rpm	Portuguese resources
+-   Ted_sk_SK.tar.gz ted_sk_SK-2.17-1.noarch.rpm	Slovak resources
+-   Ted_sv_SE.tar.gz ted_sv_SE-2.17-1.noarch.rpm	Swedish resources
+-   Ted_hu_HU.tar.gz ted_hu_HU-2.17-1.noarch.rpm	Hungarian resources
+-   Ted_mg_MG.tar.gz ted_mg_MG-2.17-1.noarch.rpm	Malagasy resources
+
+For more information in particular about compilation, configuration 
+and issues around, X11 configuration, refer to the index.{html,rtf} files
+or the full manual: TedDocument-en_US.{rtf,html,pdf,txt}
+
+To install Ted, log in as root, download the relevant files to a temporary
+directory and issue the following command:
+$ sh ./installTed.sh
+The installation command will ask you what to install.
+
+If you want to compile yourself, please read compilation instructions 
+in the index.{html,rtf} files. They are short and easy. Or read the 
+full manual: TedDocument-en_US.{rtf,html,pdf,txt}. The Makefile in 
+the source package gives an overview of compilation options.
+
+Author
+------
+
+Mark de Does
+January 28 2005
+http://www.mdedoes.com
+To prevent spam, no mail address is given in the textual material.

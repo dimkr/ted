@@ -1,0 +1,177 @@
+CC=@CC@
+
+WFLAGS=	-Wall			\
+	-pedantic		\
+	-Wpointer-arith		\
+	-Wstrict-prototypes	\
+	-Wmissing-declarations	\
+	-Wnested-externs	\
+	-Wshadow		\
+	-Wmissing-prototypes
+
+CFLAGS=				\
+	    @CFLAGS@ 		\
+	    -I.			\
+	    -I../appUtil	\
+	    -I../include
+
+#CFLAGS	= $(WFLAGS) -g -O2 -I. -I../appUtil -I../include
+
+# 17 lines
+OBS	=	\
+		indword.o\
+		indutil.o\
+		indscan.o\
+		indrenum.o\
+		indnode.o\
+		indmini.o\
+		indlist.o\
+		indlink.o\
+		inditem.o\
+		indind.o\
+		indguess.o\
+		indfront.o\
+		inddeb.o\
+		indScanStream.o\
+		indAffix.o
+
+LIB=	../lib/ind.a
+
+$(LIB):	$(OBS)
+	ar r $@ $(OBS) && @RANLIB@ $@
+
+# deps -I. -I../appUtil -I../include
+######################################## !! sh
+
+indAffix.o: \
+    indAffix.c \
+    ../include/charnames.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h \
+    indAffix.h
+
+indScanStream.o: \
+    indScanStream.c \
+    indConfig.h \
+    indScanStream.h \
+    ../appUtil/sioGeneral.h \
+    ind.h \
+    ../include/charnames.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+inddeb.o: \
+    inddeb.c \
+    indConfig.h \
+    indlocal.h \
+    ind.h \
+    ../appUtil/utilEndian.h \
+    ../include/appDebugoff.h \
+    ../include/appDebug.h
+
+indfront.o: \
+    indfront.c \
+    indConfig.h \
+    ind.h \
+    indlocal.h \
+    ../appUtil/utilEndian.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+indguess.o: \
+    indguess.c \
+    indConfig.h \
+    indlocal.h \
+    ind.h \
+    ../appUtil/utilEndian.h \
+    ../include/charnames.h \
+    ../include/appDebugoff.h \
+    ../include/appDebug.h
+
+indind.o: \
+    indind.c \
+    indConfig.h \
+    indlocal.h \
+    ind.h \
+    ../appUtil/utilEndian.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+inditem.o: \
+    inditem.c \
+    indConfig.h \
+    indlocal.h \
+    ind.h \
+    ../appUtil/utilEndian.h \
+    ../include/appDebugoff.h \
+    ../include/appDebug.h
+
+indlink.o: \
+    indlink.c \
+    indConfig.h \
+    indlocal.h \
+    ind.h \
+    ../appUtil/utilEndian.h \
+    ../include/appDebugoff.h \
+    ../include/appDebug.h
+
+indlist.o: \
+    indlist.c \
+    indConfig.h \
+    ind.h \
+    ../include/appDebugoff.h \
+    ../include/appDebug.h
+
+indmini.o: \
+    indmini.c \
+    indConfig.h \
+    indlocal.h \
+    ind.h \
+    ../appUtil/utilEndian.h
+
+indnode.o: \
+    indnode.c \
+    indConfig.h \
+    indlocal.h \
+    ind.h \
+    ../appUtil/utilEndian.h \
+    ../include/appDebugoff.h \
+    ../include/appDebug.h
+
+indrenum.o: \
+    indrenum.c \
+    indConfig.h \
+    indlocal.h \
+    ind.h \
+    ../appUtil/utilEndian.h \
+    ../include/appDebugoff.h \
+    ../include/appDebug.h
+
+indscan.o: \
+    indscan.c \
+    indConfig.h \
+    ../include/charnames.h \
+    indlocal.h \
+    ind.h \
+    ../appUtil/utilEndian.h \
+    ../appUtil/utilFontEncoding.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+indutil.o: \
+    indutil.c \
+    indConfig.h \
+    ind.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+
+indword.o: \
+    indword.c \
+    indConfig.h \
+    ind.h \
+    indlocal.h \
+    ../appUtil/utilEndian.h \
+    ../include/charnames.h \
+    ../include/appDebugon.h \
+    ../include/appDebug.h
+

@@ -1,0 +1,23 @@
+/* XPM */
+static char * file_txt_xpm[] = {
+"16 16 4 1",
+" 	c #FFFFFFFFFFFF",
+".	c #084208420842",
+"X	c #C630C630C630",
+"o	c #000000000000",
+"                ",
+"  ..........    ",
+"  .XXXXXX.X..   ",
+"  .XXXXXX.XX.o  ",
+"  .XXXXXX.XXX.  ",
+"  .XXXXXX.....  ",
+"  .XXXXXXXXXX.  ",
+"  .XXXXXXXXXX.  ",
+"  .XXXXXXXXXX.  ",
+"  .XXXXXXXXXX.  ",
+"  .XXXXXXXXXX.  ",
+"  .XXXXXXXXXX.  ",
+"  .XXXXXXXXXX.  ",
+"  .XXXXXXXXXX.  ",
+"  .XXXXXXXXXX.  ",
+"  ............  "};
