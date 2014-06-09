@@ -1422,12 +1422,12 @@ static APP_TXACTIVATE_CALLBACK_H( tedListToolGetNumberFormat, w, voidlt )
     return;
     }
 
-#   ifdef USE_MOTIF
 static void appMakeHBoxInRow(		APP_WIDGET *	pHBox,
 					APP_WIDGET	row,
 					int		position,
 					int		colspan )
     {
+#   ifdef USE_MOTIF
     Arg			al[20];
     int			ac= 0;
 
@@ -1452,8 +1452,8 @@ static void appMakeHBoxInRow(		APP_WIDGET *	pHBox,
     XtManageChild( hbox );
 
     *pHBox= hbox; return;
-    }
 #   endif
+    }
 
 static void appMakeLabelAndRowRow(	APP_WIDGET *		pRow,
 					APP_WIDGET *		pLabel,
